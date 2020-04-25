@@ -1,5 +1,6 @@
 const express = require('express');
 const getenv = require('getenv');
+const path = require('path');
 
 const config = {
     port: getenv('HTTP_PORT', 3000)
@@ -8,9 +9,7 @@ const config = {
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use('/', express.static(path.join(__dirname, 'content')))
 
 app.listen(config.port, () => console.log(`App listening on port ${config.port}`));
 
