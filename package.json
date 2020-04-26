@@ -4,17 +4,22 @@
   "description": "Publish a static website to a cloud service with authentication",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./app.js",
+    "start:dev": "nodemon ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "getenv": "^1.0.0",
     "minimist": "^1.2.5",
     "passport": "^0.4.1",
     "passport-oauth": "^1.0.0",
     "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }

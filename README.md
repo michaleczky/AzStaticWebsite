@@ -12,7 +12,7 @@ To run the service you must provide the following configuration as commandline p
 
 Example:
 
-`npm run start -- --clientid="<client id here>" --clientsecret="<secret here>" --callbackurl="http://localhost:3000/auth/oauth2/callback"`
+`npm run start:dev -- --clientid="<client id here>" --clientsecret="<secret here>" --callbackurl="http://localhost:3000/auth/oauth2/callback"`
 
 ## References
 
