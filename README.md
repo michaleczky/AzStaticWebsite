@@ -8,7 +8,7 @@ To run the service you must provide the following configuration as commandline p
 | clientid     | CLIENT_ID     | OAuth2 provider's client ID                                                                      |
 | clientsecret | CLIENT_SECRET | OAuth2 provider's client secret                                                                  |
 | callbackurl  | CALLBACK_URL  | callback url to return after the login (for example: http://localhost:3000/auth/oauth2/callback) |
-| loglevel     | LOGLEVEL      | set log verbosity level (debug, info, warning, error) [optional]                                 |
+| loglevel     | LOGLEVEL      | set log verbosity level (*debug*, info, warning, error) [optional]                               |
 
 Example:
 
@@ -19,3 +19,4 @@ Example:
 - [Quickstart: Add sign in using OpenID Connect to a Node.js web app](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-nodejs-webapp)
 - [Passport.js OAuth documentation](http://www.passportjs.org/docs/oauth/)
 - [Passport-OAuth2 plugin](https://github.com/jaredhanson/passport-oauth2)
+- [OAuth 2 with Passport - 10 Steps Recipe](https://www.pveller.com/oauth2-with-passport-10-steps-recipe/)
