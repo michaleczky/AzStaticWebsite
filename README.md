@@ -1,6 +1,8 @@
 
 ## Getting Started
 
+### Run from Command Line
+
 To run the service you must provide the following configuration as commandline parameters or environment variables:
 
 | Parameter    | Envvar        | Description                                                                                      |
@@ -13,6 +15,16 @@ To run the service you must provide the following configuration as commandline p
 Example:
 
 `npm run start:dev -- --clientid="<client id here>" --clientsecret="<secret here>" --callbackurl="http://localhost:3000/auth/oauth2/callback"`
+
+### Run in a Container
+
+Build the docker container from the dockerfile:
+
+`docker build -t <containername> .`
+
+Run the docker container locally on port 3000:
+
+`docker run -e "CLIENT_ID=<client id here>" -e "CLIENT_SECRET=<secret here>" -e "CALLBACK_URL=http://localhost:3000/auth/oauth2/callback" --publish 3000:3000 <containername>`
 
 ## References
 
