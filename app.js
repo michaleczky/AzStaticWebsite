@@ -76,5 +76,8 @@ app.get('/auth/oauth2/callback',
   passport.authenticate('oauth2', { session: true, successReturnToOrRedirect: '/', failureRedirect: '/auth/error' })
 );
 app.get('/auth/error', (req, res) => res.send('Authentication error.'));
-app.get('/', ensureLoggedIn('/auth/oauth2'), (req, res) => res.sendFile(path.join(__dirname, 'content/index.html')));
+app.get('/*', 
+  ensureLoggedIn('/auth/oauth2'), 
+  express.static(path.join(__dirname, 'content'))
+);
 app.listen(config.port, () => logger.info(`App listening on port ${config.port}`)); 
