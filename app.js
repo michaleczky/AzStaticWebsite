@@ -1,4 +1,5 @@
 const express = require('express');
+const https = require('https');
 const session = require('express-session');
 const getenv = require('getenv');
 const parseArgs = require('minimist');
@@ -7,18 +8,19 @@ const winston = require('winston');
 const passport = require('passport'), OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 const crypto = require('crypto');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+const fs = require('fs');
 
 const argv = parseArgs(process.argv.slice(2));
 
 const config = {
   port: argv['port'] || getenv('HTTP_PORT', 3000),
+  https: argv['https'] || getenv('HTTPS', 'false'),
   loglevel: argv['loglevel'] || getenv('LOGLEVEL', 'debug'),
   clientId: argv['clientid'] || getenv('CLIENT_ID', ''),
   clientSecret: argv['clientsecret'] || getenv('CLIENT_SECRET', ''),
-  callbackUrl: argv['callbackurl'] || getenv('CALLBACK_URL', ''),
+  callbackUrl: argv['callbackurl'] || getenv('CALLBACK_URL', ''),  
   authorizationURL: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-  tokenUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
-  graphApiUrl: 'https://graph.microsoft.com'
+  tokenUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 };
 
 const logger = winston.createLogger({
@@ -80,4 +82,12 @@ app.get('/*',
   ensureLoggedIn('/auth/oauth2'), 
   express.static(path.join(__dirname, 'content'))
 );
-app.listen(config.port, () => logger.info(`App listening on port ${config.port}`)); 
+
+let server = app;
+if (config.https === 'true') {
+  server = https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+  }, app);
+}
+server.listen(config.port, () => logger.info(`App listening on port ${config.port} (https=${config.https})`)); 
